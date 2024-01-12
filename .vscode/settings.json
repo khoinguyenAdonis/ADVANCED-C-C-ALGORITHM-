@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "membermanagement.h": "c",
+        "linkedlist.h": "c"
+    }
+}
