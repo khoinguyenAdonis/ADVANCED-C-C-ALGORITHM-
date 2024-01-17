@@ -16,10 +16,17 @@ typedef struct MemberNode {
     struct MemberNode* next;
 } MemberNode;
 
+typedef struct TreeNode {
+    MemberNode data;
+    struct TreeNode* left;
+    struct TreeNode* right;
+} TreeNode;
 
 
 MemberNode* createMemberNode(Member member);
 void push_back(MemberNode **ptp, Member value);
 void sortList(MemberNode **ptp);
-
+TreeNode* findNode(TreeNode* root, const char* uid);
+void addRemainingValuesToList(TreeNode* root, MemberNode** head);
+TreeNode* deleteNode(TreeNode* root, const char* uid);
 #endif 

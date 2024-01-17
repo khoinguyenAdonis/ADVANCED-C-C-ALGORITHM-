@@ -1,6 +1,5 @@
 {
     "files.associations": {
-        "membermanagement.h": "c",
-        "linkedlist.h": "c"
+        "stdlib.h": "c"
     }
 }
