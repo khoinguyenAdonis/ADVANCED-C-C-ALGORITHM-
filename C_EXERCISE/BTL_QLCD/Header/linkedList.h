@@ -26,7 +26,11 @@ typedef struct TreeNode {
 MemberNode* createMemberNode(Member member);
 void push_back(MemberNode **ptp, Member value);
 void sortList(MemberNode **ptp);
+long numberOfList(MemberNode **head);
 TreeNode* findNode(TreeNode* root, const char* uid);
 void addRemainingValuesToList(TreeNode* root, MemberNode** head);
+TreeNode *buildTree(MemberNode *head, long start, long end);
 TreeNode* deleteNode(TreeNode* root, const char* uid);
+void inorderTraversal(TreeNode* root);
+
 #endif 

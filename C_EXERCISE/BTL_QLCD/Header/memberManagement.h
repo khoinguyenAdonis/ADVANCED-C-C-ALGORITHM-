@@ -4,7 +4,7 @@
 
 
 void addMember(const char* filename, Member* member,MemberNode **ptp);
-void deleteMember(const char* filename, const char* uid);
+void deleteMember(const char* filename, const char* uid, MemberNode **ptp);
 // void editMember(const char* filename, Member updatedMember);
 // int searchByUID(const Member* member, const char* uid);
 // int searchByLicensePlate(const Member* member, const char* licensePlate);
