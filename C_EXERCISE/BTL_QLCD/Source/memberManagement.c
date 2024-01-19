@@ -21,26 +21,27 @@ void addMember(const char* filename, Member* member,MemberNode **ptp){
 }
 
 /*
-    Function: addMember
+    Function: deleteMember
     Description: This function use delete member for list and file csv  
-    input :filename,uid, pointer to poniter ptp
+    input :filename,uid, pointer to poniter ptp, pointer tree
     output : none
 
 */
-void deleteMember(const char* filename, const char* uid, MemberNode **ptp){
+void deleteMember(char* filename, char* uid, TreeNode *head,MemberNode **ptp){
+    deleteNode(head,uid,ptp);
+    removeDataFileCSV(filename);
+    writeFileCSV(filename,ptp);
+}
+/*
+    Function: editMember
+    Description: This function use editMember member for list and file csv  
+    input :filenpath,uid, pointer to poniter ptp, pointer tree,new member
+    output : none
 
-    MemberNode* current = *ptp;
-    MemberNode* prev = NULL;
-    while (current != NULL && strcmp(current->data.uid, uid) != 0) {
-        prev = current;
-        current = current->next;
-    }
-    if (current != NULL) {
-        if (prev == NULL) {
-            *ptp = current->next;
-        } else {
-            prev->next = current->next;
-        }
-        free(current);
-    }
+*/
+void editMember(char* filename, Member updatedMember,TreeNode* root,char* key,MemberNode** head){
+    updateNode(root, key, updatedMember,head);
+    removeDataFileCSV(filename);
+    writeFileCSV(filename,head);
+
 }

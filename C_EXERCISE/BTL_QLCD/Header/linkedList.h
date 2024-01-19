@@ -30,7 +30,6 @@ long numberOfList(MemberNode **head);
 TreeNode* findNode(TreeNode* root, const char* uid);
 void addRemainingValuesToList(TreeNode* root, MemberNode** head);
 TreeNode *buildTree(MemberNode *head, long start, long end);
-TreeNode* deleteNode(TreeNode* root, const char* uid);
-void inorderTraversal(TreeNode* root);
-
+TreeNode* deleteNode(TreeNode* root, char* key, MemberNode** head);
+void updateNode(TreeNode* root, char* key, Member newData, MemberNode** head);
 #endif 
