@@ -32,4 +32,5 @@ void addRemainingValuesToList(TreeNode* root, MemberNode** head);
 TreeNode *buildTree(MemberNode *head, long start, long end);
 TreeNode* deleteNode(TreeNode* root, char* key, MemberNode** head);
 void updateNode(TreeNode* root, char* key, Member newData, MemberNode** head);
+void inorderTraversal(TreeNode* root);
 #endif 

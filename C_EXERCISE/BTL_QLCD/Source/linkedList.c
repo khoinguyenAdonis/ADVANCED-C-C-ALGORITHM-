@@ -237,3 +237,11 @@ void updateNode(TreeNode* root, char* key, Member newData, MemberNode** head) {
         }
     }
 }
+void inorderTraversal(TreeNode* root) {
+    if (root) {
+        inorderTraversal(root->left);
+        printf("UID: %s, Room Number: %s, Name: %s, License Plate: %s\n",
+               root->data.data.uid, root->data.data.roomNumber, root->data.data.name, root->data.data.licensePlate);
+        inorderTraversal(root->right);
+    }
+}

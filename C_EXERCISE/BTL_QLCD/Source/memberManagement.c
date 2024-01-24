@@ -7,7 +7,7 @@
     output : none
 
 */
-void addMember(const char* filename, Member* member,MemberNode **ptp){
+void addMember( char* filename, Member* member,MemberNode **ptp){
 
     FILE* file = fopen(filename, "a");  // Mở file ở chế độ append (nối thêm vào cuối file)
     if (file == NULL) {
