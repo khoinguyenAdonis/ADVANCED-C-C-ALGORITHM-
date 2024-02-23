@@ -36,6 +36,12 @@
                         cout<<"---------------------------------------------------"<<endl;\
                         fflush(stdin);
 
+#define SEARCHID        system("clear");\
+                        cout<<"NHAP UID SV CAN TIM KIEM: ";\
+                        fflush(stdin);\
+                        cin>>uid;
+
+#define FILEPATH        student.csv
 
 void menu();
 #endif

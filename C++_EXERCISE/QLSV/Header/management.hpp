@@ -2,6 +2,7 @@
 #define __MANAGEMENT_H__
 #include "D:\c_c++\ADVANCED-C-C-ALGORITHM-\C++_EXERCISE\QLSV\Header\student.hpp"
 #include <algorithm>
+#include <fstream>
 #define STUDENTIFO      string name;\
                         int age;\
                         float math;\
@@ -10,7 +11,8 @@
                         string gender;\
                         Gender studentGender;\
                         cout<<"Nhap thong tin sinh vien:"<<endl;\
-                        cout<<"Ho & ten  : "; getline(cin,name);\
+                        fflush(stdin);\
+                        cout<<"Ho & ten  : "; cin>>name;\
                         fflush(stdin);\
                         cout<<"Tuoi : "; cin>>age;\
                         fflush(stdin);\
@@ -53,6 +55,10 @@ class StudentManagement {
         void editStudent(int studentId);
         void arrangeName();
         void arrangeScore();
+        void displayStudents();
+        Student* findStudentById(int studentId);
+        void displayStudentById(int studentId) ;
+        void saveToCSV(const string& filename);
 };
 
 #endif

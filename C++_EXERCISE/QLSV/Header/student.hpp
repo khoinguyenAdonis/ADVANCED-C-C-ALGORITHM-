@@ -2,7 +2,7 @@
 #define __STUDENT_H__
 #include <iostream>
 #include <list>
-
+#include <cstdlib>
 using namespace std;
 typedef enum{
     NONE,
