@@ -1,11 +1,23 @@
 #include "D:\c_c++\ADVANCED-C-C-ALGORITHM-\C++_EXERCISE\RestaurantManagement\Header\management.hpp"
 
+/*
+Funtion Name: oder
+Function description : oder food in list food
+Input parameters: ManageDish listD
+Output:  NONE
+*/
 void Table::oder(ManageDish listD){
 	Dish Oder = listD.dish();
 	array.push_back(Oder);
     SUCCESSFULl 
 }
 
+/*
+Funtion Name: display
+Function description : show list oder
+Input parameters: NONE
+Output:  NONE
+*/
 void Table::display() {
     if (array.empty()) {
         FAIL
@@ -17,6 +29,12 @@ void Table::display() {
     }
 }
 
+/*
+Funtion Name: cancel
+Function description : cancel the ordered item
+Input parameters: NONE
+Output:  NONE
+*/
 void Table::cancel(){
     display();
     SEARCHID
@@ -33,6 +51,12 @@ void Table::cancel(){
 	FAIL
 }
 
+/*
+Funtion Name: change
+Function description : change the ordered item
+Input parameters: NONE
+Output:  NONE
+*/
 void Table::change(ManageDish listD){
     display();
     SEARCHID
@@ -50,6 +74,12 @@ void Table::change(ManageDish listD){
 	FAIL   
 }
 
+/*
+Funtion Name: pay
+Function description : pay the bill
+Input parameters: NONE
+Output:  NONE
+*/
 void Table::pay(){
     int money = 0;
     auto it = array.begin();
@@ -61,11 +91,22 @@ void Table::pay(){
     cout<<"Total:  "<<money<<" VND"<<endl;
 }
 
+/*
+Funtion Name: setStatus
+Function description : status settings
+Input parameters: status
+Output:  NONE
+*/
 void Table::setStatus(bool bStatus){
     status = bStatus;
 }
 
- 
+/*
+Funtion Name: getStatus
+Function description : get status table
+Input parameters: NONE
+Output:  NONE
+*/
 string Table::getStatus(){
    if(status){
         return "O";
@@ -73,7 +114,12 @@ string Table::getStatus(){
    return "X";
 }
 
-
+/*
+Funtion Name: resizeArray
+Function description : set up table number
+Input parameters: table number
+Output:  NONE
+*/
 void Management::resizeArray(int newSize){
     myArray.resize(newSize);
 }
@@ -95,7 +141,12 @@ void Management::displayTable(){
     cout<<"X Busy"<<endl;
     cout<<"O Available"<<endl;
 }
-
+/*
+Funtion Name: editTable
+Function description : ordering function
+Input parameters: table location, option, list food
+Output:  NONE
+*/
 void Management::editTable(int num, int option,ManageDish listd){
     if (myArray.size() >= num) {
         switch (option)

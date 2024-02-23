@@ -1,17 +1,42 @@
 #include "D:\c_c++\ADVANCED-C-C-ALGORITHM-\C++_EXERCISE\RestaurantManagement\Header\dish.hpp"
 
+
+/*
+Funtion Name: getId
+Function description : return id food
+Input parameters: NONE
+Output: id
+*/
 int Dish::getId()const{
     return id;
 }
 
+/*
+Funtion Name: getName
+Function description : return name food
+Input parameters: NONE
+Output:  name food
+*/
 string Dish::getName(){
     return name;
 }
 
+/*
+Funtion Name: getPrice
+Function description : return Price of food
+Input parameters: NONE
+Output:  price
+*/
 int Dish::getPrice(){
     return price;
 }
 
+/*
+Funtion Name: displayInfo
+Function description : show information food
+Input parameters: NONE
+Output:  NONE
+*/
 void Dish::displayInfo(){
     cout<<"Infomation:  "<<endl;
     cout << setw(5) << left << "ID";
@@ -25,6 +50,12 @@ void Dish::displayInfo(){
 	cout << setw(20) << right << getPrice<< endl;
 }
 
+/*
+Funtion Name: addDish
+Function description : add new food in list
+Input parameters: NONE
+Output:  NONE
+*/
 void ManageDish::addDish() {
     INPUTDISH
 	Dish newDish(name, price);
@@ -32,6 +63,12 @@ void ManageDish::addDish() {
     SUCCESSFULl
 }
 
+/*
+Funtion Name: displayDish
+Function description : show information list Dish
+Input parameters: NONE
+Output:  NONE
+*/
 void ManageDish::displayDish() {
     if (array.empty()) {
         FAIL
@@ -43,6 +80,12 @@ void ManageDish::displayDish() {
     }
 }
 
+/*
+Funtion Name: editDish
+Function description : edit information food
+Input parameters: NONE
+Output:  NONE
+*/
 void ManageDish::editDish() {
 	SEARCHID
     bool found = false;
@@ -61,6 +104,12 @@ void ManageDish::editDish() {
     }
 }
 
+/*
+Funtion Name: eraseDish
+Function description : erase  food inm list food
+Input parameters: NONE
+Output:  NONE
+*/
 void ManageDish::eraseDish() {
     SEARCHID
     auto it = array.begin();
@@ -75,6 +124,13 @@ void ManageDish::eraseDish() {
     }
 	FAIL
 }
+
+/*
+Funtion Name: dish
+Function description :search food buy id
+Input parameters: NONE
+Output:  NONE
+*/
 Dish ManageDish::dish(){
 	SEARCHID
 	auto it = array.begin();
