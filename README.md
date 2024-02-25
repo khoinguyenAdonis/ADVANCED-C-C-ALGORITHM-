@@ -830,7 +830,7 @@ int main() {
 
 
 <details>
-  <summary><h1>⭐C++ programming language<h2><summary>
+  <summary><h1>⭐C++ programming language<h2></summary>
 
 <details>
   <summary><h2>Class</h2></summary>
