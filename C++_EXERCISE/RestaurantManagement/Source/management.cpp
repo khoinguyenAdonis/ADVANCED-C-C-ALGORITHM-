@@ -109,9 +109,9 @@ Output:  NONE
 */
 string Table::getStatus(){
    if(status){
-        return "O";
+        return "x";
    }
-   return "X";
+   return "O";
 }
 
 /*
@@ -122,6 +122,9 @@ Output:  NONE
 */
 void Management::resizeArray(int newSize){
     myArray.resize(newSize);
+    for (auto i : myArray){
+        i.setStatus(false);
+    }
 }
 void Management::displayTable(){
     int number = 0;
@@ -132,9 +135,9 @@ void Management::displayTable(){
         number ++;
     }
     cout<<endl;
-    cout<< setw(20)<<left <<"Statu:";
+    cout<< setw(20)<<left <<"Status:";
     for ( auto i : myArray)
-    {
+    { 
         cout<< setw(4)<<left <<i.getStatus();
     }
     cout<<endl;

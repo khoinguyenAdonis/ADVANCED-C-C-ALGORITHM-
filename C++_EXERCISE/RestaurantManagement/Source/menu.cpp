@@ -23,14 +23,19 @@ void menu(){
             case 1:
                     TABLENUMBER
                     tableArray.resizeArray(option);
+                    break;
             case 2:
                     dishArray.addDish();
+                    break;
             case 3:
                     dishArray.editDish();
+                    break;
             case 4:
-                    dishArray.editDish();
+                    dishArray.displayDish();
+                    break;
             case 5:
                     dishArray.displayDish();
+                    break;
             default:
                 break;
             }

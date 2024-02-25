@@ -826,3 +826,996 @@ int main() {
 ```
 
 </details>
+  <summary><h1>⭐C++ programming language</h1></summary>
+
+<details>
+  <summary><h2>Class</h2></summary>
+	
+### Class là gì?
+- Class là 1 kiểu dữ liệu do người dùng định nghĩa
+- Biến trong class gọi là `PROPERTY`.
+- Hàm trong class gọi là `METHOD`.
+- Ví dụ:
+
+```C++
+class ClassName {
+private:   
+// Các thành phần riêng tư (private) chỉ có thể truy cập bên trong lớp   
+// Dữ liệu thành viên, hàm thành viên, ...
+protected:    
+// Các thành phần bảo vệ (protected) tương tự như private, nhưng có thể truy cập từ lớp kế thừa
+public:
+    // Các thành phần công khai (public) được truy cập từ bên ngoài lớp
+	// Dữ liệu thành viên, hàm thành viên, ...
+	// Hàm thành viên và các phương thức khác có thể được định nghĩa tại đây
+	// ..
+};
+
+```
+**Constructor**
+-  Constructor  là một method sẽ được tự động gọi khi khởi tạo object. Constructor sẽ có tên trùng với tên của class,Nó được sử dụng để khởi tạo các thuộc tính của đối tượng..
+-  Có hai loại chính:
+	+ Default Constructor (Constructor mặc định): không có tham số .
+	+ Parameterized Constructor (Constructor với tham số):   constructor được khởi tạo và có tham số truyền vào.
+<details>
+<summary>Ví dụ:</summary>
+
+```C++
+#include <iostream>
+
+class HinhChuNhat {
+public:
+    double chieuDai;
+    double chieuRong;
+
+    // Parameterized Constructor
+    HinhChuNhat(int dai = 5, int rong = 3) {
+        chieuDai = dai;
+        chieuRong = rong;
+    }
+
+    // Hàm tính diện tích
+    double tinhDienTich() {
+        return chieuDai * chieuRong;
+    }
+};
+
+int main() {
+    // Tạo đối tượng HinhChuNhat và sử dụng constructor với giá trị mặc định
+    HinhChuNhat hinhCN1;
+
+    // Tạo đối tượng HinhChuNhat và truyền giá trị khác cho constructor
+    HinhChuNhat hinhCN2(7, 4);
+
+    // Hiển thị diện tích của hình chữ nhật 1 và 2
+    std::cout << "Dien tich hinh chieuDai1: " << hinhCN1.tinhDienTich() << std::endl;
+    std::cout << "Dien tich hinh chieuDai2: " << hinhCN2.tinhDienTich() << std::endl;
+
+    return 0;
+}
+
+
+```
+</details>
+
+**Destructor**
+- DDestructor trong C++ là một method sẽ được tự động gọi khi đối tượng được giải phóng. Destructor sẽ có tên trùng với tên của class và thêm ký tự ~ ở phía trước tên.
+<details>
+<summary>Ví dụ:</summary>
+
+```C++
+#include <iostream>
+
+class HinhChuNhat {
+public:
+    double chieuDai;  
+    double chieuRong;
+
+    // Constructor
+    HinhChuNhat() {
+        chieuDai = 10;
+        chieuRong = 9;
+    }
+
+    // Destructor
+    ~HinhChuNhat() {
+        std::cout << "Destructor" << '\n';
+    }
+
+    // Hàm tính diện tích   
+    double tinhDienTich() {       
+        return chieuDai * chieuRong; 
+    }
+};
+
+int main() {
+    HinhChuNhat hinh1;
+    std::cout << "Dien tich: " << hinh1.tinhDienTich() << '\n';
+
+    return 0;
+}
+
+```
+</details>
+
+**Static keyword**
+- Khi một property trong class được khai báo với từ khóa static, thì tất cả các object sẽ dùng chung địa chỉ của property này.
+<details>
+<summary>Ví dụ:</summary>
+
+```C++
+#include <iostream>
+#include <string>
+
+class HinhChuNhat {
+public:
+    double chieuDai;
+    double chieuRong;
+    static int var;
+};
+
+int HinhChuNhat::var =0;
+// Đây là cách đặt giá trị khởi tạo cho biến static var trong lớp HinhChuNhat(bắt buộc)
+int main() {
+    HinhChuNhat hinh1;
+    HinhChuNhat hinh2;
+    HinhChuNhat hinh3;
+
+    std::cout << "address of chieu dai: " << &hinh1.chieuDai << '\n'; 
+    std::cout << "address of chieu dai: " << &hinh2.chieuDai << '\n'; 
+    std::cout << "address of chieu dai: " << &hinh3.chieuDai << '\n'; 
+
+    std::cout << "address of var: " << &hinh1.var << '\n'; 
+    std::cout << "address of var: " << &hinh2.var << '\n'; 
+    std::cout << "address of var: " << &hinh3.var << '\n'; 
+
+    return 0;
+}
+
+```
+</details>
+
+
+ 
+
+<details>
+<summary>Ví dụ:</summary>
+
+```C++
+class sinhvien {
+	puplic:// phạm vi truy cập
+	string ten;//PROPERTY
+	int tuoi;
+	int mssv;
+	void display(){//METHOD
+	cout<<"ten:"<<ten<<endl;
+	cout<<"tuoi:"<<tuoi<<endl;
+	cout<<"mssv:"<<mssv<<endl;
+
+}
+};
+
+int main(){
+	sinhvien sv1;
+	sv1.ten ="hoang";//OBJECT thuộc class sinh viên
+	sv1.tuoi=19;
+	sv1.mssv =123123;
+	sv1.display();// in ra 0.
+	return 0;
+
+}
+
+```
+- Class có thể khởi tạo giá trị ban đầu:
+```C++
+class sinhvien {
+	puplic:// phạm vi truy cập
+	sinhvien(string l_ten , int l_tuoi,string l_lop, int l_ngay){// gia tri ban đầu có tham số đầu vào
+		static int  s_mssv;
+		mssv=s_mssv;
+		s_mssv ++;
+		tuoi =l_tuoi;
+		ten=l_ten;
+		lop=l_lop;
+		ngay =l_ngay;
+	}
+	string ten;//PROPERTY
+	stactic int ngay; // static trong class phải khởi tạo giá trị ban đầu 
+	int tuoi;
+	int mssv;
+	string lop;
+	string ten;
+	void display();//METHOD
+	
+	//director là 1 cơ chế tự động 
+	~sinhvien(){
+		count<<"Huy object co ten:"<<ten>>endl;
+	}
+};
+
+int sinhvien::ngay;// khởi tạo gia trị ban đầu cho static
+
+void sinhvien::display{
+	cout<<"ten:"<<ten<<endl;
+	cout<<"tuoi:"<<tuoi<<endl;
+	cout<<"mssv:"<<mssv<<endl;
+	cout<<"lop:"<<mssv<<endl;
+
+}
+void test1(){
+	sinhvien sv1("thai",19,"CDEE"),sv2("tha",20,"fhsjd",14);//sv1 là OBJECT thuộc class sinhvien
+	printf("dia chi sv1.mssv: %p\n",&(sv1.mssv));//khác địa chỉ
+	printf("dia chi sv2.mssv: %p\n",&(sv2.mssv));//khác địa chỉ
+	printf("--------------");
+	printf("dia chi sv1.ngay: %p\n",&(sv1.ngay));//cung  địa chỉ
+	printf("dia chi sv2.ngay: %p\n",&(sv2.ngay));//cung địa chỉ
+	// Khi khởi tạo thì địa chỉ của nó tồn tại trong suốt chương trình nên member static này của các object sẽ đều có cùng 1 địa chỉ.
+	sv1.display();
+	sv2.display();	
+}
+
+int main(){
+	test1();
+	return 0;
+	// sẽ in ra là ten,tuoi,mssv,lop,Huy object co ten thai
+}
+```
+</details>
+
+
+</details>
+<details>
+  <summary><h2>namespace</h2></summary>
+
+- Namespace:là từ khóa trong C++ được sử dụng để phân biệt các hàm, lớp, biến cùng tên trong các file khác nhau.
+ tạo những vùng nhớ khác nhau ,mỗi namespace là 1 chương trình riêng ,với 2 namespace khác nhau có thể tạo các biến trùng tên. Nhưng trong 1 namespace không thể có 2 biến cùng tên
+
+<details>
+<summary>Ví dụ:</summary>
+
+```C++
+//fileB.hpp
+
+#include <iostream>
+
+using namespace std;
+
+namespace fileB{
+    void function(() { cout << “function in fileB running.” << endl; }
+}
+//fileC.hpp
+#include <iostream>
+
+using namespace std;
+
+namespace fileC{
+    void function(() { cout << “function in fileC running.” endl; }
+}
+
+
+# 
+
+```
+**Dùng using namespace tên, có thể rút gọn code**
+- Ví dụ:
+```C++
+using namespace onga;
+int main(){
+	cout<<"con ong a: teo"<<teo<<endl;
+	return 0;
+	
+}
+
+// FILE MAIN.CPP
+#include <iostream>
+#incldue “fileB.hpp”
+#include “fileC.hpp”
+
+using namespace std;
+
+int main() {
+    fileB::function();
+    fileC::function();
+    
+    return 0;
+}
+
+
+
+
+
+```
+</details>
+
+</details>
+<details>
+
+  <summary><h3>Hướng đối tượng </h3></summary>
+
+### hướng đối tượng là gi?
+- OOP là một phương pháp lập trình dưới dạng các "đối tượng," mỗi đối tượng có chứa dữ liệu và các phương thức để thao tác dữ liệu đó.
+- Các khái niệm quan trọng trong OOP bao gồm:
+	+ Class: để tạo ra các đối tượng , nó mô tả dữ liệu và phương thức của đối tượng đó
+	+ Đối tượng (Object) : Một đối tượng cụ thể được tạo ra từ class, có 
+**Phạm vi truy cập:**
+- Public:Member nào trong Public thì object có thể trỏ trực tiếp được và nội tại trong class cũng sử dụng được .
+- protected:Member trong protected thì Class con có thể trỏ tới được
+- private: Chỉ có nội tại trong class mới sử dụng được.Lý do đặt PROPERTY trong private, để chắc chắn object không trỏ tới được.
+
+**1/Encapsulation (Tính đóng gói):**
+- Object không được phép truy cập PROPERTY từ phạm vi public
+- PROPERTY nằm ở private hoặc protected.
+- Để truy cập PROPERTY phải thông qua method.
+- Lý do để bảo vệ dữ liệu của một đối tượng khỏi sự xâm phạm từ bên ngoài.
+
+<details>
+<summary>Ví dụ:</summary>
+
+```C++
+#include<iostream>
+#include<string>
+using namespace std;
+class doituong{
+	private:
+	int tuoi;//PROPERTY
+	string ten;
+
+	public:
+	void hienthi(){//hienthi() method
+	    cout<<"ten: "<<ten<<endl;
+		cout<<"tuoi: "<<tuoi<<endl;
+	}
+	void setten(int name){
+		ten=name;
+	}
+	void settuoi(int old){
+		tuoi=old;
+	}
+	int gettuoi(){
+		return tuoi;
+
+	}
+	string getten(){
+		return ten;
+
+	}
+	
+
+}
+int main(){
+	doituong dt;//dt là object thuộc class doituong
+	dt.hienthi();
+	return 0;
+ }
+```
+</details>
+
+**2/Inheritance (Tính kế thừa ):**
+- Một class có thể kế thừa các thuộc tính của một class khác đã tồn tại trước đó.
+Khi một class con được tạo ra bởi việc kế thừa thuộc tính của class cha thì chúng ta sẽ gọi class con đó là subclass trong C++, và class cha chính là superclass trongC++.
+
+**khi nào nên dùng/không dùng class kế thừa**
+- Nên dùng: Khi một lớp B được miêu tả là "B là một A". Ví dụ: một lớp hình tròn có thể kế thừa từ một lớp hình học.
+- Không nên:Mối quan hệ "has-a" (có một) diễn ra khi một lớp chứa một đối tượng của một lớp khác. ví dụ: danhsachSV chứa một đối tượng sinhvien, do đó chúng ta có thể nói danhsachSV "có" hoặc "bao gồm" danh sách các sinh viên.
+
+<details>
+<summary>Ví dụ:</summary>
+
+```C++
+using namespace std;
+
+class doituong{
+
+	protected:
+	int namsinh;
+	string ten;
+	int tuoi;
+	public:
+	void nhapthongtin(string name,int old,int year){ 
+	    	ten=name;
+			tuoi=old;
+			namsinh=year;
+	}
+	void hienthi(){//hienthi() method cha
+	    	cout<<"ten: "<<ten<<endl;
+			cout<<"tuoi: "<<tuoi<<endl;
+			cout<<"namsinh: "<<namsinh<<endl;
+	}
+
+};
+
+class sinhvien : public doituong{
+    protected:
+	int MSSV;
+	public:
+	void setMSSV(int mssv){
+		MSSV=mssv;
+	}
+	void hienthi(){// là method con từ cha và sửa nó thì được gọi là override(ghi đè)
+		cout<<"MSSV: "<<MSSV<<endl;
+		cout<<"ten: "<<ten<<endl;
+		cout<<"tuoi: "<<tuoi<<endl;
+		cout<<"namsinh: "<<namsinh<<endl;
+		
+
+	}
+
+};
+
+
+class HS : public sinhvien{
+    private:
+	int HS;
+	public:
+	void setHS(int hs){
+		HS=hs;
+	}
+	void hienthi();
+
+};
+//thằng HS sẽ kế thừa thằng gần nhất >> hienthi(), sẽ kế thừa hienthi() của sinhvien chứ không phải doituong
+int main(void){
+    doituong dt;
+	sinhvien sv;
+	dt.nhapthongtin("hung",24,1883);
+	dt.hienthi();
+	printf("-----------\n");
+	sv.nhapthongtin("thai",25,1992);
+	sv.hienthi();
+
+    return 0;
+}
+//ten: hung
+//tuoi: 24
+//namsinh: 1883
+-----------
+//MSSV: 0
+//ten: thai
+//tuoi: 25
+//namsinh: 1992
+
+```
+</details>
+
+- Các kiểu kế thừa: public,private và protected .Thì private là không  dùng vì class con kế thừa private sẽ đưa tất cả property từ class cha vào private. Làm cho các class tiếp theo không thể truy cập vào được( private chỉ cho phép nội tại class trỏ tới)
+
+<details>
+<summary>Ví dụ:</summary>
+
+```C++
+class doituong{
+	protected:
+	int namsinh;
+	string ten;
+	int tuoi;
+	public:
+	void nhapthongtin(string name,int old,int year){ 
+	    	ten=name;
+			tuoi=old;
+			namsinh=year;
+	}
+
+};
+
+class sinhvien : private doituong{	
+	// tất cả property  của doituong sẽ chuyển vào private của sinhvien
+ 
+
+};
+
+class hs : private sinhvien{
+ // lỗi vì thằng private không kế thừa và sử dụng được từ class con
+};
+
+```
+
+</details>
+
+**3/Polymorphism (Tính đa hình):**
+- Các method có thể trùng tên với nhau , nhưng phải khác các input parameter
+<details>
+<summary>Ví dụ:</summary>
+
+```C++
+using namespace std;
+
+class toanhoc{
+
+	protected:
+	int namsinh;
+	void tong(int a,int b ){ 
+	    	printf("tong a+b :%d\n",a+b);
+	}
+	void hienthi(int a,int b ,int c){ 
+		printf("tong a+b+c :%d\n",a+b+c);
+	}
+	int hienthi(int a,double b){ 		
+		return a +(int)b;
+	}
+};
+
+int main(void){
+	toanhoc th;
+	th.tong(7,4);
+	th.tong(5,3,5);
+	printf("tong:%d\n",th.tong(5,6.7));
+
+}
+```
+</details>
+
+**4/Abstraction (Tính trừu tượng ):**
+
+- Ẩn đi các chi tiết của một đối tượng và hiển thị những gì cần thiết, để sử dụng đối tượng đó.
+
+**Template trong C++ là gì?**
+- Là một kiểu dữ liệu trừu tượng tổng quát hóa cho các kiểu dữ liệu int, float, double, bool...
+
+<details>
+<summary>Ví dụ</summary>
+
+```C++	
+void hienthi(int a,int b ,int c){ 
+		printf("tong a+b+c :%d\n",a+b+c);
+}
+int hienthi(int a,double b){ 		
+		return a +(int)b;
+}
+//thay vì dài như vậy ta có thể dùng Template do C++ hỗ trợ
+//Code viết lại:
+template <typename test>
+test tong(test a,test b){
+	return test(a +b);
+}
+int main(void){
+	tong("tong a va b: %d\n",tong(6,4));
+	tong("tong a va b: %f\n",tong(6.5,4.4));
+} 
+```
+</details>
+
+
+**Virtual trong C++ là gì?**
+- Được sử dụng để tạo hàm ảo. Hàm ảo cho phép lớp con ghi đè hàm của lớp cha  . 
+
+
+<details>
+<summary>Ví dụ</summary>
+
+```C++
+
+ #include <iostream>
+
+class Animal {
+public:
+    virtual void speak() {
+        std::cout << "Animal speaks\n";
+    }
+};
+
+class Dog : public Animal {
+public:
+    void speak() override {
+        std::cout << "Dog barks\n";
+    }
+};
+
+class Cat : public Animal {
+public:
+    void speak() override {
+        std::cout << "Cat meows\n";
+    }
+};
+
+int main() {
+    Animal* animal1 = new Dog();
+    Animal* animal2 = new Cat();
+
+    animal1->speak();  // Output: Dog barks
+    animal2->speak();  // Output: Cat meows
+
+    delete animal1;
+    delete animal2;
+
+    return 0;
+}
+
+
+```
+</details>
+
+
+</details>
+<details>
+  <summary><h2>Standard template library </h2></summary>
+
+## STL là một thư viện trong ngôn ngữ lập trình C++ cung cấp một tập hợp các template classes và functions để thực hiện nhiều loại cấu trúc dữ liệu và các thuật toán phổ biến
+
+**Một số thành phần chính của STL:**
+- Container:Một container là một cấu trúc dữ liệu chứa nhiều phần tử gồm:
+	+ Vector
+	+ List
+	+ Map
+	+ Array
+
+- Iterator
+- Algorithms
+- Functor
+
+
+**Vector trong C++ là gì?**
+
+- vector là một mảng động, tức là có khả năng thay đổi kích thước  
+- Truy cập ngẫu nhiên: Việc truy cập các phần tử của vector có thể được thực hiện bằng cách sử dụng chỉ số.
+- Một số method của vector:
+1. at(): Truy cập vào phần tử của vector
+2. size(): Trả về kích thước của vector
+3. resize(): Thay đổi kích thước của vector
+4. begin(): Địa chỉ của phần tử đầu tiên của vector
+5. end(): Địa chỉ của phần tử cuối cùng của vector
+6. push_back(): Thêm phần tử vào vị trí cuối của vector
+<details>
+<summary>Ví dụ </summary>
+
+```C++
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+  
+    vector <int> arr1 = {2,5,7,4,9};
+
+    arr1.at(0) = 3;
+    arr1.resize(7);
+
+    for (int i = 0; i < arr1.size(); i++)
+    {
+        cout << "Value: " << arr1.at(i) << endl;
+    }
+    
+    arr1.push_back(10);
+
+    cout << "-----------" << endl;
+    for (int i = 0; i < arr1.size(); i++)
+    {
+        cout << "Value: " << arr1.at(i) << endl;
+    }
+    
+
+    return 0;
+}
+
+```
+
+</details>
+
+
+**List là gì**
+
+- List là một c  danh sách liên kết hai chiều.
+- Dưới đây là một số đặc điểm quan trọng của list:
+	+ Truy cập tuần tự
+	+ Hiệu suất chèn và xóa: 
+- Một số method của list:
+	+ push_back():
+	+ pop_back():
+	+ insert(): Chèn một node vào list
+	+ erase(): Xóa một node của list
+	+ size(): Trả về kích thước của list
+- Sử dụng vector khi:
+	+ Cần truy cập ngẫu nhiên đến các phần tử.
+    + Thực hiện nhiều thao tác chèn/xóa ở cuối danh sách.
+	+ Dung lượng có thể biết trước hoặc thay đổi ít.
+- Sử dụng list khi:
+	+ Thực hiện nhiều thao tác chèn/xóa ở bất kỳ vị trí nào trong danh sách.
+	+ Cần thực hiện nhiều thao tác chèn/xóa mà không làm ảnh hưởng đến các iterators hiện có.
+
+**Map**
+- Map là một container trong STL của C++, cung cấp một cấu trúc dữ liệu ánh xạ key-value
+- Map lưu trữ các phần tử dưới dạng cặp key-value, trong đó mỗi key phải là duy nhất trong map.
+- Ta có thể thêm phần tử mới vào map bằng cách sử dụng operator [] hoặc hàm insert(). Để xóa phần tử, bạn có thể sử dụng hàm erase().
+- Ta có thể sử dụng iterator để duyệt qua các phần tử của map
+
+**Array**
+- Array là một container có kích thước cố định và có sẵn trong thư viện STL (Standard Template Library)
+- array có kích thước cố định được xác định tại thời điểm biên dịch và không thể thay đổi sau khi được khai báo.
+- array hỗ trợ truy cập ngẫu nhiên vào các phần tử thông qua toán tử []
+
+# Iterator
+- Iterator cung cấp một cách chung để duyệt qua các phần tử của một container mà không cần biết chi tiết về cách container được triển khai.
+- Iterator là một đối tượng cho phép truy cập tuần tự qua các phần tử của một container.
+- Nó giống như con trỏ, cho phép di chuyển qua các phần tử trong container.
+
+# Algorithm
+- Thư viện STL (Standard Template Library) cung cấp một số thuật toán tiêu biểu thông qua algorithm. 
+- Các thuật toán này hoạt động trên các phạm vi hoặc các loại dữ liệu khác nhau, giúp thực hiện các nhiệm vụ như sắp xếp, tìm kiếm, chuyển đổi dữ liệu, và nhiều thao tác khác. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<details>
+<summary>Ví dụ quan trọng</summary>
+
+```C++
+#include <iostream>
+#include <string>
+#include <vector>
+
+#define in 0
+#define intb 1
+#define add 2
+#define del 3
+#define fix 4
+#define rs 5
+#define out 6
+
+
+ 
+
+using namespace std;
+
+class sinhvien {
+protected:
+    string tensv;
+    int tuoisv;
+    int idsv;
+    float diemtoansv;
+    float diemlysv;
+    float diemhoasv;
+    float diemtrungbinhsv;
+
+public:
+    sinhvien() : tuoisv(0), idsv(0), diemtoansv(0.0), diemlysv(0.0), diemhoasv(0.0), diemtrungbinhsv(0.0) {}
+
+    sinhvien(string name, int old, int id, float diemtoan, float diemly, float diemhoa)
+        : tensv(name), tuoisv(old), idsv(id), diemtoansv(diemtoan), diemlysv(diemly), diemhoasv(diemhoa) {}
+
+    void nhapthongtinsv() {
+        cout << "Nhap ten sinh vien: ";
+        cin.ignore();
+        getline(cin, tensv);
+
+        cout << "Nhap tuoi sinh vien: ";
+        cin >> tuoisv;
+
+        do {
+        cout << "Nhap diem toan sinh vien (0>>10): ";
+        cin >> diemtoansv;
+        } while (diemtoansv < 0 || diemtoansv >10 );
+        
+       
+
+        do {
+            cout << "Nhap diem ly sinh vien (0>>10): ";
+            cin >> diemlysv;
+        } while (diemlysv < 0 || diemlysv > 10);
+
+        do {
+            cout << "Nhap diem hoa sinh vien (0>>10): ";
+            cin >> diemhoasv;
+        } while (diemhoasv < 0 || diemhoasv > 10);
+    }
+
+    float diemtrungbinh() {
+        diemtrungbinhsv = (diemtoansv + diemlysv + diemhoasv) / 3;
+        return diemtrungbinhsv;
+    }
+
+    string layXepLoai()  {
+        float dtb = diemtrungbinh();
+        if (dtb > 8) {
+            return "Gioi";
+        } else if (dtb >= 6.5 && dtb < 8) {
+            return "Kha";
+        } else {
+            return "TB";
+        }
+    }
+
+    string layThongTin()  {
+        return "Ten: " + tensv + "\nTuoi: " + to_string(tuoisv) + "\nID: " + to_string(idsv) +
+               "\nDiem Toan: " + to_string(diemtoansv) + "\nDiem Ly: " + to_string(diemlysv) +
+               "\nDiem Hoa: " + to_string(diemhoasv) + "\nDiem Trung Binh: " + to_string(diemtrungbinhsv) +
+               "\nXep loai: " + layXepLoai();
+    }
+
+    int layIdSV()  {
+        return idsv;
+    }
+    void setIdSV(int newId) {
+        idsv = newId;
+    }
+ 
+};
+
+class danhsachSV {
+private:
+    vector<sinhvien> danhsachsinhvien;
+    static int maxId ;
+    
+
+public:
+   
+    void xoasv(int id) {
+        int n = danhsachsinhvien.size();
+        bool found = false;
+        for (int i = 0; i < n; i++) {
+            if (danhsachsinhvien[i].layIdSV() == id) {
+                found = true;
+                // Xóa sinh viên tại vị trí i
+                danhsachsinhvien.erase(danhsachsinhvien.begin() + i);
+                cout << "Da xoa sinh vien co ID " << id << endl;
+
+            break;  
+            }   
+        }  
+        if (!found) {
+        cout << "Khong tim thay sinh vien co ID " << id << endl;   
+        }
+
+    }
+
+    void suaThongTinSV(int id) {
+        int n = danhsachsinhvien.size();
+        bool found = false;
+
+        for (int i = 0; i < n; i++) {
+            if (danhsachsinhvien[i].layIdSV() == id) {
+                found = true;
+                cout << "Nhap thong tin moi cho sinh vien:\n";
+                sinhvien svMoi;
+                svMoi.nhapthongtinsv();
+                svMoi.diemtrungbinh();
+                danhsachsinhvien[i] = svMoi;
+                cout << "Da cap nhat thong tin cho sinh vien co ID " << id << endl;
+
+                break;  
+            }
+        }
+
+        if (!found) {
+            cout << "Khong tim thay sinh vien co ID " << id << endl;
+        }
+    }
+
+
+    void sapXepTheoDiemTB() {
+        int n = danhsachsinhvien.size();
+        
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                 
+                if (danhsachsinhvien[j].diemtrungbinh() > danhsachsinhvien[j + 1].diemtrungbinh()) {                  
+                    sinhvien temp = danhsachsinhvien[j];
+                    danhsachsinhvien[j] = danhsachsinhvien[j + 1];
+                    danhsachsinhvien[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    void inThongTinDanhSach() const {
+        for (auto sv : danhsachsinhvien) {
+            cout << sv.layThongTin() << endl;
+            cout << "-------------" << endl;
+        }
+    }
+
+    void nhapThemSV() {
+        sinhvien sv;
+        maxId++;
+        sv.setIdSV(maxId);
+        sv.nhapthongtinsv();
+        sv.diemtrungbinh();
+        danhsachsinhvien.push_back(sv);
+    }
+    
+    void reset(){
+        danhsachsinhvien.clear();
+
+
+    }
+};
+
+int danhsachSV::maxId = 0;
+
+int main() {
+    danhsachSV dssv;
+    int nhapkey;
+    int i_id;
+    
+    int soluongsv;
+
+    do {
+        cout << "Nhap so luong sinh vien (khong duoc am): ";
+        cin >> soluongsv;
+    } while (soluongsv < 0);
+
+    for (int i = 0; i < soluongsv; i++) {
+        dssv.nhapThemSV();
+    }
+    do {
+        cout << "Vui long lam theo huong dan: "<< endl;
+        cout << "Nhap 0:In ra danh sach sinh vien "<< endl;
+        cout << "Nhap 1:In ra danh sach sinh vien theo diem TB"<< endl;
+        cout << "Nhap 2:them sinh vien va in ra theo diem TB"<< endl;
+        cout << "Nhap 3:xoa sinh vien va in ra theo diem TB"<< endl;
+        cout << "Nhap 4:sua sinh vien va in ra theo diem TB"<< endl;
+        cout << "Nhap 5:reset chuong trinh"<< endl;
+        cout << "Nhap 6:thoat chuong trinh"<< endl;
+    
+    
+        cin >> nhapkey;
+        switch (nhapkey)
+        {
+        case  in:
+            cout << "Danh sach sinh vien:"<< endl;;
+            dssv.inThongTinDanhSach();
+            break;
+
+        case  intb:
+            dssv.sapXepTheoDiemTB();
+            cout << "Danh sach sinh vien sau khi sap xep theo diem trung binh:"<< endl;;
+            dssv.inThongTinDanhSach();
+            break;
+
+        case add:
+            dssv.nhapThemSV(); 
+            dssv.inThongTinDanhSach();  
+            break;
+
+        case del:
+            cout << "vui long nhap id sinh vien can xoa:"<< endl;;
+            cin >> i_id;
+            dssv.xoasv(i_id);
+            dssv.inThongTinDanhSach();  
+            break;
+
+        case fix:
+            cout << "vui long nhap id sinh vien can sua:"<< endl;;
+            cin >> i_id;
+            dssv.suaThongTinSV(i_id); 
+            dssv.inThongTinDanhSach();  
+            break;
+        case rs:
+            cout << "reset tat ca du lieu" << endl;
+            dssv.reset();
+            break;
+        case out:
+            cout << "Thoat chuong trinh" << endl;
+            break;
+        
+        default:
+            cout << "Lua chon khong hop le. Vui long nhap lai"<< endl;
+            break;
+        }
+    }
+    while (nhapkey!=6);
+ 
+    return 0;
+
+}
+
+
+```
+</details>
+
+
+
+
+
+</details>
