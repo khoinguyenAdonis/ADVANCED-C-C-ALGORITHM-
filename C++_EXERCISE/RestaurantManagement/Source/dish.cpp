@@ -47,7 +47,7 @@ void Dish::displayInfo(){
 	cout << setfill(' ');	
 	cout << setw(5) << left << getId();
 	cout << setw(30) << left << getName();
-	cout << setw(20) << right << getPrice<< endl;
+	cout << setw(20) << right << getPrice()<< endl;
 }
 
 /*
