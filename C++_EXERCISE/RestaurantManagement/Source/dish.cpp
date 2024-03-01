@@ -127,7 +127,7 @@ void ManageDish::eraseDish() {
 
 /*
 Funtion Name: dish
-Function description :search food buy id
+Function description :search food by id
 Input parameters: NONE
 Output:  NONE
 */

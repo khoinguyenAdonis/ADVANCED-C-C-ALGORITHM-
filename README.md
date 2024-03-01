@@ -1354,7 +1354,25 @@ int main(void){
 
 **Template trong C++ là gì?**
 - Là một kiểu dữ liệu trừu tượng tổng quát hóa cho các kiểu dữ liệu int, float, double, bool...
+- gồm 2 loại template function và template class;
+template funcion cho phép người sử dụng dùng cùng một func với nhiều kiểu dữ liệu khác nhau mà không phải khai báo nhiều phiên bản của cùng 1 func mà khác kiểu dữ liệu.
+template classs giống như của func nhưng đuocwj sử dụng cho class. Cho phép ta viết 1 class mà sử dụng nhiều kiểu dư3x liệu khác nhau
+vi dụ:
+```c++
+template <typename T>
+class Student{
+private:
+T a;
+public:
+Student(T A) : a(A){};
+};
 
+int main(){
+    Student<int> khoi(42); // a=42 kieu int
+    Student<float> khoi(42,1); // a=42,1 kieu float
+}
+
+```
 <details>
 <summary>Ví dụ</summary>
 
@@ -1818,8 +1836,40 @@ int main() {
 ```
 </details>
 
+<details>
+  <summary><h2>Smart pointer</h2></summary>
 
+## SmartPointer là gì
+ là một cơ chế quản lý bộ nhớ tự động giúp hạn chế rủi ro của lỗi liên quan đến quản lý bộ nhớ giúp người lập trình tránh được việc quản lý bộ nhớ
+### unique Pointer 
+ là một loại của smart pointer trong 1 thời điêmr thì 1 OBJ chỉ có thể đuocwj trỏ bởi 1 unique_pointer
+### share Pointer
+ cũng là 1 loại smart pointer thì nó có thể nhiều con trỏ cùng trỏ đến 1 obj hay arry . nó cũng cung cấp 1 method để đếm được có baop nhiêu con share pointer đang trỏ đến obj hay array. nó sửi dụng bộ đếm tham chiếu để theo dỗi đối tượng 
+### Weak pointer
+ là một cơ chế giữ tham chiếu đến đồi tượng được quản lý bởi shared-ptr. nó cung cấp cách để theo dỗi đối tượng 1 cách an toàn mà không tăng thêm bộ đếm tham chiếu shared-pointer. Nó k trực tiếp truy cập đến đối tượng
+ weak_ptr có một phương thức là lock(), mà trả về một shared_ptr. Nếu shared_ptr mà weak_ptr theo dõi vẫn tồn tại, lock() sẽ trả về một shared_ptr hợp lệ có thể sử dụng để truy cập đối tượng. Ngược lại, nếu shared_ptr đã bị giải phóng, lock() sẽ trả về một shared_ptr rỗng.
 
+</details>
+<details>
+  <summary><h2>Can Protoco</h2></summary>
 
+![image](https://github.com/khoinguyenAdonis/Embedded_Interview_T10/assets/143527982/64e8f67e-1e2f-46b8-a6d5-9e2274c391bc)
+![image](https://github.com/khoinguyenAdonis/Embedded_Interview_T10/assets/143527982/8d2eb925-5a75-4f3b-94f8-40b9854c9fc7)
 
+### độ ưu tiên khi truyền dữ liệu
+
+mỗi Can đều có 1 id do lập trình viên quy định (tự cài đặt)
+![image](https://github.com/khoinguyenAdonis/Embedded_Interview_T10/assets/143527982/5771e2d1-8f00-4ead-acb6-bfcb5b75baf7)
+vd 
+0100001001
+0101110000
+
+khi truyền địa chỉ id do truyền đi bit nào can module sẽ nhận lại đúng mức đó với đó do 2 dây tx và rx đều nối vào can high và can low khi có sự sai lệch giữa các bit truyền đi và nhận vào thì can nào có bit ở id bằng 0 sẽ được ưu tiên hơn từ biết có trọng số cao đến thâp buộc can có bit cao ở địa chỉ id vào chế độ chờ nhận đây là cách mà can phân biệt ai sẽ truyền ai nhận cùng thời điểm. 
+
+![image](https://github.com/khoinguyenAdonis/Embedded_Interview_T10/assets/143527982/7bfd6264-4afd-4182-b606-cdf1296a4ae0)
+
+### cách truyền bit 0 và 1 
+![image](https://github.com/khoinguyenAdonis/Embedded_Interview_T10/assets/143527982/7eee81b1-5d96-46d1-8479-092600502e5b)
+
+![image](https://github.com/khoinguyenAdonis/Embedded_Interview_T10/assets/143527982/a225c622-8bcd-421b-b6d1-9508dea2a231)
 </details>

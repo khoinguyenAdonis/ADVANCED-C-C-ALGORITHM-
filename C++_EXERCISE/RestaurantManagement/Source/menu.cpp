@@ -31,7 +31,7 @@ void menu(){
                     dishArray.editDish();
                     break;
             case 4:
-                    dishArray.displayDish();
+                    dishArray.eraseDish();
                     break;
             case 5:
                     dishArray.displayDish();
