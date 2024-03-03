@@ -1873,3 +1873,31 @@ khi truyền địa chỉ id do truyền đi bit nào can module sẽ nhận l�
 
 ![image](https://github.com/khoinguyenAdonis/Embedded_Interview_T10/assets/143527982/a225c622-8bcd-421b-b6d1-9508dea2a231)
 </details>
+
+<details>
+  <summary><h2>AUTOSAR Classic </h2></summary>
+Autosar Classic là một kiến trúc phần mềm tiêu chuẩn dành cho các hệ thống điều khiển trong xe hơi. Nó bao gồm một bộ các tiêu chuẩn, khung làm việc và các hướng dẫn được phát triển bởi một liên minh các nhà sản xuất ô tô và nhà cung cấp linh kiện ô tô (như Daimler, BMW, Ford, General Motors, Bosch, Continental, và nhiều hãng khác).
+
+Autosar Classic được thiết kế để cung cấp một cơ sở phần mềm chuẩn cho việc phát triển phần mềm điều khiển xe hơi. Nó giúp giảm thiểu sự phụ thuộc vào nhà cung cấp, tăng tính tương thích và tái sử dụng mã, và tạo điều kiện cho việc phát triển các tính năng phức tạp trong các hệ thống điều khiển xe hơi.
+
+### overview
+![image](https://github.com/khoinguyenAdonis/Embedded_Interview_T10/assets/143527982/592d761f-422c-4fe5-8729-40ebab36b83d)
+
+- Mirocontroler : là những chip vd stm32 ... nạp chương trình viết bằng thanh ghi 
+- MCAL : nơi viết các function để điều khiển mirocontroler cung cấp API cho các layer phía trên sử dụng mà không cần phải quan tâm đến phần cứng
+- ECU Abstractuion layer: nơi chứa những tính năng cụ thể đuocwj viết bằng các API cung cấp từ MCAL mà không cần quan tâm đến hạ tầng dưới 
+- Service layer : cung cấp các dịch vụ và chức năng cần thiết cho việc chạy ứng dụng trên các thiết bị nhúng. Hạ tầng RTE đóng vai trò quan trọng trong việc quản lý việc thực thi các mô-đun phần mềm và quản lý tài nguyên hệ thống. 
+    Quản lý vòng đời của ứng dụng: Hạ tầng RTE theo dõi và điều khiển vòng đời của các ứng dụng và mô-đun phần mềm, bao gồm việc khởi tạo, chạy, và dừng lại.
+
+    Quản lý tài nguyên hệ thống: Hạ tầng RTE quản lý các tài nguyên hệ thống như bộ nhớ, cổng giao tiếp, và tài nguyên phần cứng khác, đảm bảo rằng chúng được sử dụng hiệu quả và đúng cách bởi các ứng dụng.
+
+    Quản lý thời gian thực: Hạ tầng RTE hỗ trợ quản lý thời gian thực cho các ứng dụng, bao gồm việc lập lịch, định thời, và xử lý sự kiện trong các khoảng thời gian cố định.
+
+    Giao tiếp giữa các mô-đun phần mềm: Hạ tầng RTE cung cấp các cơ chế để ứng dụng và mô-đun phần mềm có thể giao tiếp và trao đổi dữ liệu với nhau một cách an toàn và đáng tin cậy.
+
+    Quản lý lỗi và xử lý ngoại lệ: Hạ tầng RTE có khả năng xử lý lỗi và ngoại lệ xảy ra trong quá trình thực thi ứng dụng, đảm bảo tính ổn định và tin cậy của hệ thống.
+- Application layer : Nó thực hiện các chức năng liên quan đến ứng dụng cụ thể mà người dùng cuối sử dụng để tương tác với mạng hoặc hệ thống. thông qua RTE gọi xuống các api dưới mcal r xuống mirocontroler 
+
+BSW  là gòm các MCAL, compliex driver, service layer, ECU Abstraction  
+</details>
+</details>
