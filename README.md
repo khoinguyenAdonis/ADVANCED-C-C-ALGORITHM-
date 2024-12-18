@@ -1001,6 +1001,122 @@ Phụ thuộc vào thư viện tại runtime:
 Tốn thời gian tải:
     Thư viện cần được nạp vào bộ nhớ trong runtime, có thể gây ra độ trễ nhỏ.
 
+
+</details>
+<details>
+  <summary><h2>Các câu hỏi thường gặp khi phỏng vấn </h2></summary>
+
+### Sự khác biệt giữa typedef và #define ?
+Cả typedef và #define đều được sử dụng để định nghĩa các tên thay thế trong lập trình C, nhưng chúng có sự khác biệt về cách hoạt động, mục đích, và khả năng sử dụng. Dưới đây là sự khác biệt chi tiết:
+
+Đặc điểm	|typedef|	#define
+Xử lý	|Được xử lý bởi trình biên dịch	|Được xử lý bởi trình tiền xử lý (preprocessor)
+Kiểm tra kiểu (Type-checking)	|Có kiểm tra kiểu khi sử dụng	|Không có kiểm tra kiểu dữ liệu
+Công dụng chính	||Định nghĩa bí danh (alias) cho kiểu dữ liệu	|Định nghĩa hằng số hoặc thay thế văn bản trong mã nguồn
+Khả năng thay thế	|Chỉ áp dụng cho các kiểu dữ liệu	|Áp dụng cho bất kỳ đoạn mã nào
+Khả năng xử lý phức tạp	|Hỗ trợ các kiểu dữ liệu phức tạp như struct, pointer	|Không hỗ trợ cấu trúc phức tạp (thay thế thô)
+
+### Tại sao không nên sử dụng biến toàn cục quá nhiều?
+
+1 Khó quản lý và bảo trì mã nguồn
+
+Phạm vi sử dụng rộng:
+
+Biến toàn cục có thể được truy cập và sửa đổi từ bất kỳ đâu trong chương trình. Khi số lượng biến toàn cục tăng lên, việc theo dõi trạng thái và nơi biến được thay đổi trở 
+
+nên khó khăn.
+
+Tăng độ phức tạp:
+
+Khi có lỗi liên quan đến biến toàn cục, rất khó xác định chính xác phần nào của chương trình gây ra lỗi, đặc biệt trong các dự án lớn với nhiều module.
+
+2. Gây ra lỗi không mong muốn (Side effects)
+
+Thay đổi không kiểm soát:
+
+Bất kỳ hàm nào truy cập vào biến toàn cục đều có thể thay đổi giá trị của nó, dẫn đến các lỗi khó dự đoán.
+
+Lỗi ngẫu nhiên (Random bugs):
+
+Nếu một biến toàn cục bị sửa đổi sai hoặc ghi đè bởi một hàm không mong muốn, các phần khác của chương trình có thể bị ảnh hưởng một cách bất ngờ.
+
+3. Ảnh hưởng đến tính đóng gói (Encapsulation)
+
+Vi phạm nguyên tắc lập trình hướng đối tượng:
+
+Một trong những nguyên tắc quan trọng của lập trình là đóng gói dữ liệu và chức năng trong các module/hàm. Biến toàn cục làm suy yếu tính đóng gói, khiến dữ liệu có thể bị 
+
+truy cập ngoài ý muốn.
+
+4. Giảm khả năng tái sử dụng mã
+
+Phụ thuộc vào trạng thái chung:
+
+Các hàm hoặc module phụ thuộc vào biến toàn cục trở nên khó tái sử dụng, vì chúng không độc lập và phụ thuộc vào trạng thái của biến.
+
+Khó tích hợp:
+
+Khi tích hợp các module sử dụng chung biến toàn cục, có thể xảy ra xung đột về tên biến hoặc giá trị.
+
+5. Ảnh hưởng đến khả năng kiểm thử (Testing)
+
+Khó viết unit test:
+
+Unit test yêu cầu các hàm độc lập, không phụ thuộc vào trạng thái bên ngoài. Biến toàn cục làm cho việc viết và kiểm tra các hàm trở nên phức tạp.
+
+Khó tái tạo lỗi:
+
+Các lỗi liên quan đến biến toàn cục thường khó tái hiện trong môi trường kiểm thử, vì chúng phụ thuộc vào trạng thái toàn cục của chương trình.
+
+6. Tăng nguy cơ xung đột tên biến
+
+Tên biến toàn cục dễ bị ghi đè:
+
+Trong các dự án lớn hoặc khi làm việc với nhiều lập trình viên, việc trùng tên biến toàn cục có thể dẫn đến lỗi khó phát hiện.
+
+7. Tiêu tốn tài nguyên bộ nhớ
+
+Chiếm không gian bộ nhớ cố định:
+
+Biến toàn cục được cấp phát trong suốt thời gian chạy của chương trình (Data hoặc BSS segment), ngay cả khi không sử dụng, dẫn đến lãng phí tài nguyên.
+
+Khó tối ưu hóa:
+
+Trình biên dịch khó tối ưu mã nguồn khi có quá nhiều biến toàn cục, vì không thể xác định rõ ràng phạm vi sử dụng của chúng.
+
+8. Làm suy yếu khả năng xử lý đa luồng (Multithreading)
+
+Không an toàn trong môi trường đa luồng:
+
+Biến toàn cục có thể bị truy cập đồng thời từ nhiều luồng, dẫn đến lỗi dữ liệu đua (race condition).
+
+Khó kiểm soát đồng bộ:
+
+Cần thêm cơ chế đồng bộ (mutex, semaphore) để đảm bảo an toàn, làm tăng độ phức tạp.
+
+Giải pháp thay thế
+
+Để tránh các vấn đề trên, bạn nên hạn chế sử dụng biến toàn cục và áp dụng các phương pháp sau:
+
+Sử dụng biến cục bộ:
+
+Đặt biến trong phạm vi hàm hoặc module nơi nó được sử dụng.
+
+Truyền tham số (Parameter passing):
+
+Truyền dữ liệu qua tham số cho các hàm thay vì dùng biến toàn cục.
+
+Sử dụng static để giới hạn phạm vi:
+
+Dùng từ khóa static cho biến toàn cục nếu biến chỉ cần sử dụng trong một file.
+
+Đóng gói dữ liệu trong struct:
+
+Sử dụng struct hoặc class để đóng gói dữ liệu, tạo tính rõ ràng và dễ bảo trì.
+
+Sử dụng RTOS (trong hệ nhúng):
+
+Lưu dữ liệu liên quan đến từng tác vụ (task) trong các biến cục bộ hoặc queue thay vì dùng biến toàn cục.
 </details>
 </details>
 
