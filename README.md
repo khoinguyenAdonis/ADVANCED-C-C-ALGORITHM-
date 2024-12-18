@@ -33,6 +33,7 @@ Kích thước kiểu struct tối thiểu bằng kích thước các thành vi�
 Union trong C là một kiểu dữ liệu đặc biệt có sẵn trong C cho phép lưu trữ các kiểu dữ liệu khác nhau trong cùng một vị trí bộ nhớ. Cấu trúc của Union là tất cả các thành phần của nó dùng chung một vùng nhớ có kích thước tương ứng với thành phần lớn nhất.
 Do đó kích thước của union là kích thước lớn nhất của kiểu dữ liệu trong nó. Thay đổi nội dung 1 thành viên trong union sẽ dẫn đến thay đổi nội dung của thành viên khác.
 
+
 </details>
 <details>
     <summary><h2>Phân vùng bộ nhớ ram </h3></summary>
@@ -67,12 +68,27 @@ Do đó kích thước của union là kích thước lớn nhất của kiểu 
 - Chứa các biến khai báo hằng số.
 - Chứa mã máy của chương trình đã được biên dịch.
 
+***NOTE***
+    - HEAD : vùng bộ nhớ động được cấp phát và giải phóng thủ công bằng các hàm như malloc(), free(), new, delete(c++). 
+        lưu ý khi sử dụng HEAD :
+        - Cấp Phát Thủ công : khi dùng head phải quản lý được bộ nhớ . không giải phóng đúng cách gây đến rò rỉ bộ nhớ (memory leak)
+        - Thời Gian Truy Cập : Head Chậm hơn Stack về thời gian truy cập do cách quản lý phức tạp hơn. chỉ nên dùng HEAD khi cấp phát bộ nhớ lớn hoặc không biết trước kích thước.
+        - Framentation (Phân mảnh): Lạm dụng cấp phát gây phân mmảnhbooj nhớ , giảm hiệu suất sử dụng bộ nhớ.
+    -STACK: vùng nhớ nhỏ, có tốc độ truy cập nhanh và được quản lý tự động . 
+        Lưu ý : 
+        - STACK thường có kích thước cố định và nhỏ ( thường thì tâm vài KB đến vài chục KB trên VDK), => tránh khai báo dữ liệu quá lớn hoặc mảng dài trên hoặc cấu trúc dữ liệu phức tạp sẽ gây tràn STACK nếu không đủ
+        - Phạm vi sống : Biến cục bộ (local variable) được cấp phát trong STACK sẽ bị hủy khi ra khỏi phạm vi (scope) của hàm. Do đó, nếu trả về con trỏ đến biến cục bộ, chương trình có thể gây lỗi vì vùng nhớ đó đã bị thu hồi.
+        - Sử dụng đệ quy không kiểm soát được sẽ gây tràn STACK .
+        
 </details>
 <details>
     <summary><h2>Macro and Function </h3></summary>
 
 ### Macro
 Chuyển thay thế macro bằng các văn bản code trong quá trình tiền xử lý. 
+
+#define là một chỉ thị tiền xử lý (preprocessor directive) trong ngôn ngữ C/C++ được sử dụng để định nghĩa hằng số, macro, hoặc thay thế văn bản trước khi mã được biên dịch.
+Trình tiền xử lý sẽ quét qua mã nguồn và thay thế tất cả các biểu thức phù hợp với giá trị hoặc đoạn mã được định nghĩa trong #define trước khi trình biên dịch thực hiện.
 Khai báo:
 ```c
     #define MACRO text
@@ -109,6 +125,117 @@ Tiền xử lý:
         return 0;
     }
 ```
+### ký tự #
+
+Trong ngôn ngữ C, ký tự # được sử dụng để biểu thị chỉ thị tiền xử lý (preprocessor directives). Những chỉ thị này được xử lý trước khi mã nguồn được biên dịch, bởi một trình tiền xử lý (preprocessor).
+
+Các chỉ thị tiền xử lý không phải là câu lệnh trong chương trình C, và chúng không được thực thi trong thời gian chạy (runtime).
+
+Các loại chỉ thị tiền xử lý chính
+
+2. Chỉ thị điều kiện (#if, #ifdef, #ifndef)
+Dùng để kiểm soát việc biên dịch dựa trên các điều kiện.
+
+#if: Kiểm tra điều kiện
+```c
+#if VALUE == 10
+    printf("VALUE là 10\n");
+#else
+    printf("VALUE không phải là 10\n");
+#endif
+```
+3. Chỉ thị bao gồm tệp (#include)
+Dùng để chèn nội dung của một tệp khác vào mã nguồn.
+
+Thư viện tiêu chuẩn:
+
+```c
+
+#include <stdio.h>  // Chèn thư viện chuẩn
+```
+Tệp do người dùng định nghĩa:
+
+```c
+
+#include "myheader.h"  // Chèn tệp header do người dùng tạo
+```
+4. Chỉ thị hủy định nghĩa macro (#undef)
+Hủy định nghĩa một macro đã được định nghĩa.
+
+```c
+
+#define TEMP 25
+#undef TEMP  // TEMP không còn được định nghĩa sau dòng này
+```
+5. Chỉ thị dòng lệnh (#line)
+Thay đổi số dòng và tên file hiện tại (chỉ hữu ích trong debug).
+
+```c
+
+#line 100 "newfile.c"  // Đặt dòng hiện tại là 100 và tệp là newfile.c
+```
+6. Chỉ thị lỗi (#error)
+Dừng quá trình biên dịch và hiển thị thông báo lỗi.
+
+```c
+
+#ifndef CONFIG_H
+    #error "Config file is missing!"
+#endif
+```
+7. Chỉ thị pragma (#pragma)
+Dùng để đưa ra các lệnh cụ thể cho trình biên dịch, tùy thuộc vào từng trình biên dịch.
+Ví dụ:
+
+```c
+
+#pragma once  // Tránh việc include lặp lại một file header
+Hoạt động của # trong tiền xử lý
+Trình tiền xử lý xử lý tất cả các dòng bắt đầu bằng # trước khi biên dịch.
+Ký tự # không xuất hiện trong mã máy (machine code), vì nó chỉ ảnh hưởng đến cách mã nguồn được chuẩn bị cho trình biên dịch.
+Ký tự ## (Token Pasting Operator)
+Trong macro, ## được dùng để nối hai token thành một.
+```
+```c
+
+#define CONCAT(a, b) a##b
+
+int CONCAT(my, Var) = 10;  // Kết quả: int myVar = 10;
+Ký tự # trong macro (Stringizing Operator)
+```
+Trong macro, # chuyển một tham số thành chuỗi ký tự.
+
+```c
+#define TO_STRING(x) #x
+printf(TO_STRING(Hello World));  // Kết quả: "Hello World"
+```
+
+Tóm tắt
+Ký tự # trong C được dùng cho các chỉ thị tiền xử lý để định nghĩa macro, kiểm soát điều kiện biên dịch, bao gồm tệp, và nhiều tính năng khác.
+Vai trò chính: Chuẩn bị mã nguồn để biên dịch bằng cách thực hiện các thay thế văn bản hoặc thêm thông tin cho trình biên dịch.
+### typedef 
+    là 1 từ khóa dùng để định nghĩa kiểu dự liệu hoặc đặt tên cho kiểu dữ lệu có sẵn ; 
+    Ví dụ 
+```c
+    typedef unsigned int uint32_t // kiểu dữ liệu 32 bit được định nghĩa thế cho u int 
+```
+    Struct 
+```c
+    typedef struct point sVariable; // định nghĩa struct point = sVariable
+    sVariable a; // thay vì struct point a;
+```
+    Con trỏ hàm 
+```c
+typedef void (*Callback)(int);  // Callback là tên cho con trỏ hàm nhận một int và không trả về gì
+
+void exampleFunction(int value) {
+    printf("Value: %d\n", value);
+}
+
+Callback cb = exampleFunction;  // Gán hàm vào con trỏ hàm
+cb(42);  // Gọi hàm qua con trỏ
+```
+
 ### Function
 Khi khởi tạo một Function chương trình sẽ cấp cho Function đó 1 địa chỉ cố định để khi dùng sẽ gọi đến địa chỉ đó. khi thực hiện xong các biến local, parameter function sẽ được thu hồi. Do đó sẽ tiết kiệm bộ nhớ. Macro sẽ chiếm nhiều bộ nhớ hơn do macro chỉ thay thế lại.
 VD:
@@ -125,7 +252,7 @@ void introduce()
 	cout << "I'm a program" << endl;
 }
 ```
-</details>
+</details>      
 <details>
     <summary><h2>Compiler </h3></summary>
 
@@ -824,6 +951,55 @@ int main() {
     return 0;
 }
 ```
+
+</details>
+<details>
+  <summary><h2>LIB</h2></summary>
+File .h không phải là thư viện, mà là tệp header trong ngôn ngữ C/C++. Nó chứa các khai báo (declarations) cần thiết để sử dụng trong một hoặc nhiều file .c hoặc .cpp.
+Header file thường được sử dụng để chia sẻ thông tin giữa các file mã nguồn và hỗ trợ tổ chức mã nguồn một cách rõ ràng, dễ bảo trì.
+
+## CÁC LOẠI LIB
+
+Static Library (Thư viện tĩnh) và Dynamic Library (Thư viện động) là hai loại thư viện trong lập trình, dùng để tổ chức và tái sử dụng mã nguồn đã biên dịch. Cả hai giúp chia sẻ các hàm, lớp, hoặc các chức năng giữa nhiều chương trình mà không cần viết lại mã. Tuy nhiên, chúng khác nhau về cách liên kết và sử dụng trong ứng dụng.
+### Static Library
+Đặc điểm
+Liên kết tại thời điểm biên dịch (compile time):
+    Thư viện tĩnh được liên kết với chương trình trong giai đoạn biên dịch. Mã của thư viện được sao chép trực tiếp vào file thực thi (executable file).
+File mở rộng:
+.lib trên Windows.
+.a (archive) trên Linux/Unix.
+Tạo ra một file thực thi độc lập:
+    Sau khi chương trình được biên dịch, nó không phụ thuộc vào file thư viện tĩnh nữa.
+Ưu điểm
+Không phụ thuộc bên ngoài:
+    File thực thi hoàn chỉnh, có thể chạy trên bất kỳ hệ thống nào mà không cần kèm theo file thư viện.
+Tăng hiệu suất khi chạy:
+    Không cần tải thư viện từ bộ nhớ ngoài hoặc từ đĩa vào lúc chạy.
+Nhược điểm
+Kích thước lớn:
+    Do toàn bộ mã của thư viện được sao chép vào file thực thi, kích thước file sẽ tăng lên.
+Cập nhật khó khăn:
+    Nếu thư viện được cập nhật, tất cả các chương trình liên quan cần phải được biên dịch lại để áp dụng thay đổi.
+
+### Dynamic Library
+Đặc điểm
+    Liên kết tại thời điểm chạy (runtime):
+    Thư viện động không được sao chép vào file thực thi mà được tải vào bộ nhớ khi chương trình chạy.
+File mở rộng:
+    .dll (Dynamic-Link Library) trên Windows.
+    .so (Shared Object) trên Linux/Unix.
+Ứng dụng phụ thuộc vào thư viện động:
+    File thực thi cần có file thư viện động tại runtime.
+Ưu điểm
+Kích thước file thực thi nhỏ hơn:
+    Mã của thư viện không được sao chép vào file thực thi.
+    Dễ dàng cập nhật thư viện:
+    Thay đổi hoặc sửa lỗi trong thư viện chỉ yêu cầu cập nhật file thư viện, không cần biên dịch lại chương trình.
+    Nhược điểm
+Phụ thuộc vào thư viện tại runtime:
+    Nếu thiếu file thư viện hoặc phiên bản thư viện không khớp, chương trình sẽ không chạy được.
+Tốn thời gian tải:
+    Thư viện cần được nạp vào bộ nhớ trong runtime, có thể gây ra độ trễ nhỏ.
 
 </details>
 </details>
